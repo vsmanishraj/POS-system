@@ -1,0 +1,4 @@
+project_id = "magroms-pos"
+
+[functions.provision]
+verify_jwt = true
