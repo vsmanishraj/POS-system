@@ -88,7 +88,10 @@ export async function middleware(req: NextRequest) {
       restaurantId: (user.app_metadata.restaurant_id as string | undefined) ?? null,
       metadata: { method: req.method, path: pathname, role, status: 302, duration_ms: Date.now() - startedAt }
     });
-    return NextResponse.redirect(new URL("/", req.url));
+    const redirectUrl = new URL("/auth/login", req.url);
+    redirectUrl.searchParams.set("next", pathname);
+    redirectUrl.searchParams.set("reason", "forbidden");
+    return NextResponse.redirect(redirectUrl);
   }
 
   const tenantHeader = user.app_metadata.restaurant_id as string | undefined;

@@ -1,6 +1,6 @@
 import { BundleName, FeatureName, UserRole } from "@/types/domain";
 
-export const APP_NAME = "Magroms POS System";
+export const APP_NAME = "Magroms";
 
 export const ROUTE_ROLE_MAP: Array<{ prefix: string; roles: UserRole[] }> = [
   { prefix: "/superadmin", roles: ["SUPER_ADMIN"] },

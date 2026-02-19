@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { AppShell } from "@/components/layout/shell";
 
 export const metadata = {
-  title: "Magroms POS System",
+  title: "Magroms",
   description: "Multi-tenant cloud POS SaaS for restaurants"
 };
 

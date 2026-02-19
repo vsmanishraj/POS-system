@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #f7f9fc;
+  --bg: #e8f4f5;
   --surface: #ffffff;
   --text: #111827;
-  --muted: #6b7280;
+  --muted: #4b5563;
   --primary: #0f766e;
   --primary-strong: #115e59;
-  --accent: #ea580c;
-  --border: #e5e7eb;
+  --accent: #f97316;
+  --border: #d7e5e8;
 }
 
 * {
@@ -19,9 +19,27 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: radial-gradient(circle at top right, #dff8f4 0%, #f7f9fc 45%, #ffffff 100%);
+  background:
+    radial-gradient(circle at 10% 10%, rgba(12, 148, 136, 0.16) 0%, rgba(12, 148, 136, 0) 32%),
+    radial-gradient(circle at 85% 20%, rgba(249, 115, 22, 0.14) 0%, rgba(249, 115, 22, 0) 28%),
+    radial-gradient(circle at 50% 100%, rgba(56, 189, 248, 0.12) 0%, rgba(56, 189, 248, 0) 34%),
+    linear-gradient(145deg, #eef8fb 0%, #f4fbf8 40%, #f6fafc 100%);
   color: var(--text);
-  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-family: "Sora", "Manrope", "Avenir Next", "Segoe UI", sans-serif;
+  min-height: 100%;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(15, 118, 110, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 118, 110, 0.03) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+  z-index: -1;
 }
 
 a {

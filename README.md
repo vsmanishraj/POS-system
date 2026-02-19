@@ -1,4 +1,4 @@
-# Magroms POS System
+# Magroms
 
 Production-ready, scalable, multi-tenant, cloud POS SaaS built with Next.js App Router, TypeScript, Supabase (Postgres + Auth + RLS), Tailwind CSS, and Vercel-compatible deployment.
 
