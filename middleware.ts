@@ -75,7 +75,9 @@ export async function middleware(req: NextRequest) {
       requestId,
       metadata: { method: req.method, path: pathname, status: 302, duration_ms: Date.now() - startedAt }
     });
-    return NextResponse.redirect(new URL("/auth/login", req.url));
+    const redirectUrl = new URL("/auth/login", req.url);
+    redirectUrl.searchParams.set("next", pathname);
+    return NextResponse.redirect(redirectUrl);
   }
 
   const role = (user.app_metadata.role ?? "CUSTOMER") as UserRole;

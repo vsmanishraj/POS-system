@@ -9,10 +9,10 @@ export function Button({
   return (
     <button
       className={cn(
-        "rounded-lg px-4 py-2 text-sm font-semibold transition",
-        variant === "primary" && "bg-blue-700 text-white hover:bg-blue-800",
-        variant === "secondary" && "bg-sky-500 text-white hover:bg-sky-600",
-        variant === "ghost" && "bg-white/85 border border-blue-200 text-blue-900 hover:bg-sky-50",
+        "rounded-lg border px-4 py-2 text-sm font-semibold transition",
+        variant === "primary" && "border-sky-300/40 bg-gradient-to-r from-sky-500 to-blue-600 text-white hover:from-sky-400 hover:to-blue-500",
+        variant === "secondary" && "border-sky-300/30 bg-sky-500/20 text-sky-100 hover:bg-sky-400/30",
+        variant === "ghost" && "border-sky-300/35 bg-slate-900/45 text-slate-100 hover:bg-slate-800/70",
         className
       )}
       {...props}

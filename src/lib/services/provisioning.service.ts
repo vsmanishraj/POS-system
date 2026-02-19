@@ -129,32 +129,73 @@ async function seedRestaurantData(restaurantId: string) {
 
   if (tablesError) throw tablesError;
 
-  const { data: category, error: categoryError } = await supabaseAdmin
+  const seedCategories = [
+    { name: "Starters", sort_order: 1 },
+    { name: "Mains", sort_order: 2 },
+    { name: "Burgers & Sandwiches", sort_order: 3 },
+    { name: "Pizzas", sort_order: 4 },
+    { name: "Desserts", sort_order: 5 },
+    { name: "Beverages", sort_order: 6 }
+  ];
+
+  const { data: categories, error: categoryError } = await supabaseAdmin
     .from("menu_categories")
-    .insert({ restaurant_id: restaurantId, name: "Popular", sort_order: 1 })
-    .select("id")
-    .single();
+    .insert(seedCategories.map((category) => ({ restaurant_id: restaurantId, ...category })))
+    .select("id,name");
 
   if (categoryError) throw categoryError;
 
-  const { error: menuError } = await supabaseAdmin.from("menu_items").insert([
+  const categoryByName = Object.fromEntries((categories ?? []).map((category) => [category.name, category.id]));
+
+  const seedMenu = [
+    { category: "Starters", name: "Crispy Calamari", description: "Lemon aioli, sea salt, herbs", price: 11.5 },
+    { category: "Starters", name: "Loaded Nachos", description: "Cheese, jalapeno, salsa, sour cream", price: 9.75 },
+    { category: "Starters", name: "Tomato Basil Soup", description: "Slow-roasted tomato, basil oil", price: 7.25 },
+    { category: "Mains", name: "Grilled Herb Chicken", description: "Mashed potato, sauteed vegetables", price: 18.5 },
+    { category: "Mains", name: "Creamy Mushroom Pasta", description: "Parmesan, parsley, garlic toast", price: 15.25 },
+    { category: "Mains", name: "Paneer Tikka Bowl", description: "Jeera rice, mint yogurt, pickled onions", price: 14.5 },
+    { category: "Mains", name: "Fish & Chips", description: "Beer-battered cod, tartar sauce", price: 17.5 },
     {
-      restaurant_id: restaurantId,
-      category_id: category.id,
-      name: "Margherita Pizza",
-      description: "Classic tomato, mozzarella, basil",
-      price: 12.5,
-      is_available: true
+      category: "Burgers & Sandwiches",
+      name: "Classic Beef Burger",
+      description: "Cheddar, lettuce, onion, house sauce",
+      price: 13.5
     },
     {
+      category: "Burgers & Sandwiches",
+      name: "Smoky Chicken Burger",
+      description: "Chipotle mayo, slaw, pickles",
+      price: 12.95
+    },
+    {
+      category: "Burgers & Sandwiches",
+      name: "Veggie Club Sandwich",
+      description: "Grilled vegetables, pesto, multigrain",
+      price: 10.5
+    },
+    { category: "Pizzas", name: "Margherita Pizza", description: "Tomato sauce, mozzarella, basil", price: 12.5 },
+    { category: "Pizzas", name: "Farmhouse Pizza", description: "Peppers, olives, onion, sweet corn", price: 14.25 },
+    { category: "Pizzas", name: "Pepperoni Pizza", description: "Pepperoni, mozzarella, oregano", price: 15.5 },
+    { category: "Pizzas", name: "BBQ Chicken Pizza", description: "BBQ glaze, chicken, red onion", price: 16.25 },
+    { category: "Desserts", name: "Molten Lava Cake", description: "Warm chocolate center, vanilla scoop", price: 8.5 },
+    { category: "Desserts", name: "Classic Tiramisu", description: "Coffee-soaked sponge, mascarpone", price: 8.25 },
+    { category: "Desserts", name: "Blueberry Cheesecake", description: "Biscuit crust, berry compote", price: 8.75 },
+    { category: "Beverages", name: "Cold Coffee", description: "Espresso, milk, ice cream", price: 5.5 },
+    { category: "Beverages", name: "Fresh Lime Soda", description: "Sweet/salted sparkling lime", price: 4.25 },
+    { category: "Beverages", name: "Iced Peach Tea", description: "Brewed tea, peach syrup", price: 4.95 },
+    { category: "Beverages", name: "Sparkling Water", description: "Chilled mineral water", price: 2.95 }
+  ];
+
+  const { error: menuError } = await supabaseAdmin.from("menu_items").insert(
+    seedMenu.map((item) => ({
       restaurant_id: restaurantId,
-      category_id: category.id,
-      name: "Caesar Salad",
-      description: "Romaine, croutons, parmesan",
-      price: 8.75,
+      category_id: categoryByName[item.category],
+      name: item.name,
+      description: item.description,
+      price: item.price,
       is_available: true
-    }
-  ]);
+    }))
+  );
 
   if (menuError) throw menuError;
 

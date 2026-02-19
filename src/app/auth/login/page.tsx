@@ -83,16 +83,25 @@ export default function LoginPage() {
 
   return (
     <div className="mx-auto max-w-md">
-      <Card>
-        <h1 className="text-xl font-bold">Sign In</h1>
+      <Card className="border-sky-300/35 bg-slate-950/65">
+        <h1 className="text-xl font-bold text-sky-200">Sign In</h1>
         {forbiddenReason && (
           <p className="mt-2 rounded-md border border-amber-200 bg-amber-50 p-2 text-sm text-amber-800">
             Your account does not have access to that module. Sign in with the correct role.
           </p>
         )}
         <form className="mt-4 grid gap-3" onSubmit={handleSubmit(onSubmit)}>
-          <input className="rounded-md border p-2" placeholder="Email" {...register("email")} />
-          <input className="rounded-md border p-2" placeholder="Password" type="password" {...register("password")} />
+          <input
+            className="rounded-md border border-sky-300/40 bg-slate-900/70 p-2 text-slate-100 placeholder:text-slate-400"
+            placeholder="Email"
+            {...register("email")}
+          />
+          <input
+            className="rounded-md border border-sky-300/40 bg-slate-900/70 p-2 text-slate-100 placeholder:text-slate-400"
+            placeholder="Password"
+            type="password"
+            {...register("password")}
+          />
           {error && <p className="text-sm text-red-600">{error}</p>}
           <Button type="submit" disabled={formState.isSubmitting}>
             {formState.isSubmitting ? "Signing in..." : "Sign In"}
