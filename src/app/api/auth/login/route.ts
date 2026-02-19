@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
-import { ApiResponse } from "@/types/domain";
+import { createServerClient } from "@supabase/ssr";
 import { checkRateLimit } from "@/lib/security/rate-limit";
 import { createRequestContext, fail, ok } from "@/lib/api-response";
 
@@ -13,7 +12,25 @@ export async function POST(req: NextRequest) {
   }
 
   const body = (await req.json()) as { email: string; password: string };
-  const supabase = await createServerSupabaseClient();
+  const response = NextResponse.next({ headers: { "x-request-id": ctx.requestId } });
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return req.cookies.getAll();
+        },
+        setAll(
+          cookiesToSet: Array<{ name: string; value: string; options?: Parameters<typeof response.cookies.set>[2] }>
+        ) {
+          cookiesToSet.forEach(({ name, value, options }) => {
+            response.cookies.set(name, value, options);
+          });
+        }
+      }
+    }
+  );
 
   const { data, error } = await supabase.auth.signInWithPassword({
     email: body.email,
@@ -24,8 +41,14 @@ export async function POST(req: NextRequest) {
     return fail(ctx, error.message, 401, "AUTH_FAILED");
   }
 
-  return ok(ctx, {
+  const payload = ok(ctx, {
     user: data.user,
     session: data.session
   });
+
+  response.cookies.getAll().forEach((cookie) => {
+    payload.cookies.set(cookie.name, cookie.value, cookie);
+  });
+
+  return payload;
 }
