@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #e8f4f5;
+  --bg: #0b1a3c;
   --surface: #ffffff;
-  --text: #111827;
-  --muted: #4b5563;
-  --primary: #0f766e;
-  --primary-strong: #115e59;
-  --accent: #f97316;
-  --border: #d7e5e8;
+  --text: #0f172a;
+  --muted: #475569;
+  --primary: #1d4ed8;
+  --primary-strong: #1e40af;
+  --accent: #38bdf8;
+  --border: #c7ddff;
 }
 
 * {
@@ -20,10 +20,10 @@ body {
   margin: 0;
   padding: 0;
   background:
-    radial-gradient(circle at 10% 10%, rgba(12, 148, 136, 0.16) 0%, rgba(12, 148, 136, 0) 32%),
-    radial-gradient(circle at 85% 20%, rgba(249, 115, 22, 0.14) 0%, rgba(249, 115, 22, 0) 28%),
-    radial-gradient(circle at 50% 100%, rgba(56, 189, 248, 0.12) 0%, rgba(56, 189, 248, 0) 34%),
-    linear-gradient(145deg, #eef8fb 0%, #f4fbf8 40%, #f6fafc 100%);
+    radial-gradient(circle at 8% 12%, rgba(56, 189, 248, 0.28) 0%, rgba(56, 189, 248, 0) 34%),
+    radial-gradient(circle at 80% 18%, rgba(29, 78, 216, 0.24) 0%, rgba(29, 78, 216, 0) 32%),
+    radial-gradient(circle at 50% 120%, rgba(125, 211, 252, 0.2) 0%, rgba(125, 211, 252, 0) 42%),
+    linear-gradient(145deg, #081532 0%, #0d2759 46%, #103a74 100%);
   color: var(--text);
   font-family: "Sora", "Manrope", "Avenir Next", "Segoe UI", sans-serif;
   min-height: 100%;
@@ -35,8 +35,8 @@ body::before {
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(15, 118, 110, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15, 118, 110, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(147, 197, 253, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(147, 197, 253, 0.08) 1px, transparent 1px);
   background-size: 28px 28px;
   mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
   z-index: -1;

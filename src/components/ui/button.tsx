@@ -10,9 +10,9 @@ export function Button({
     <button
       className={cn(
         "rounded-lg px-4 py-2 text-sm font-semibold transition",
-        variant === "primary" && "bg-teal-700 text-white hover:bg-teal-800",
-        variant === "secondary" && "bg-orange-600 text-white hover:bg-orange-700",
-        variant === "ghost" && "bg-white border border-gray-300 hover:bg-gray-50",
+        variant === "primary" && "bg-blue-700 text-white hover:bg-blue-800",
+        variant === "secondary" && "bg-sky-500 text-white hover:bg-sky-600",
+        variant === "ghost" && "bg-white/85 border border-blue-200 text-blue-900 hover:bg-sky-50",
         className
       )}
       {...props}
