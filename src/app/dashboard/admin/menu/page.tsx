@@ -179,13 +179,13 @@ export default function AdminMenuPage() {
 
   return (
     <div className="grid gap-4 lg:grid-cols-3">
-      <Card className="lg:col-span-1 border-sky-300/30 bg-slate-950/55 text-slate-100">
-        <h1 className="text-xl font-bold text-sky-200">Menu Management</h1>
-        <p className="mt-1 text-sm text-slate-300">Create professional menu catalogs with pricing and availability controls.</p>
+      <Card className="lg:col-span-1">
+        <h1 className="text-xl font-bold text-slate-900">Menu Management</h1>
+        <p className="mt-1 text-sm text-slate-600">Create menu catalogs with pricing and availability controls.</p>
 
         <form className="mt-4 grid gap-3" onSubmit={onCreate}>
           <select
-            className="rounded-lg border border-sky-300/40 bg-slate-900/70 p-2 text-sm text-slate-100"
+            className="rounded-lg border border-slate-300 bg-white p-2 text-sm text-slate-900"
             value={createForm.category_id}
             onChange={(e) => setCreateForm((prev) => ({ ...prev, category_id: e.target.value }))}
             required
@@ -197,20 +197,20 @@ export default function AdminMenuPage() {
             ))}
           </select>
           <input
-            className="rounded-lg border border-sky-300/40 bg-slate-900/70 p-2 text-sm text-slate-100"
+            className="rounded-lg border border-slate-300 bg-white p-2 text-sm text-slate-900"
             placeholder="Item name"
             value={createForm.name}
             onChange={(e) => setCreateForm((prev) => ({ ...prev, name: e.target.value }))}
             required
           />
           <textarea
-            className="min-h-[84px] rounded-lg border border-sky-300/40 bg-slate-900/70 p-2 text-sm text-slate-100"
+            className="min-h-[84px] rounded-lg border border-slate-300 bg-white p-2 text-sm text-slate-900"
             placeholder="Description"
             value={createForm.description}
             onChange={(e) => setCreateForm((prev) => ({ ...prev, description: e.target.value }))}
           />
           <input
-            className="rounded-lg border border-sky-300/40 bg-slate-900/70 p-2 text-sm text-slate-100"
+            className="rounded-lg border border-slate-300 bg-white p-2 text-sm text-slate-900"
             placeholder="Price"
             type="number"
             min="0"
@@ -223,21 +223,21 @@ export default function AdminMenuPage() {
         </form>
       </Card>
 
-      <Card className="lg:col-span-2 border-sky-300/30 bg-slate-950/55 text-slate-100">
+      <Card className="lg:col-span-2">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-bold text-sky-200">Current Menu</h2>
-          <span className="rounded-full border border-sky-300/40 bg-sky-500/10 px-3 py-1 text-xs text-sky-100">
+          <h2 className="text-lg font-bold text-slate-900">Current Menu</h2>
+          <span className="rounded-full border border-slate-300 bg-slate-100 px-3 py-1 text-xs text-slate-700">
             {items.length} items
           </span>
         </div>
 
         {loading ? (
-          <p className="mt-4 text-sm text-slate-300">Loading menu items...</p>
+          <p className="mt-4 text-sm text-slate-600">Loading menu items...</p>
         ) : (
           <div className="mt-4 overflow-x-auto">
             <table className="min-w-full text-sm">
               <thead>
-                <tr className="text-left text-slate-300">
+                <tr className="text-left text-slate-600">
                   <th className="pb-2 pr-2">Item</th>
                   <th className="pb-2 pr-2">Category</th>
                   <th className="pb-2 pr-2">Price</th>
@@ -245,7 +245,7 @@ export default function AdminMenuPage() {
                   <th className="pb-2">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-sky-200/20">
+              <tbody className="divide-y divide-slate-200">
                 {items.map((item) => {
                   const isEditing = editItem?.id === item.id;
                   return (
@@ -253,21 +253,21 @@ export default function AdminMenuPage() {
                       <td className="py-3 pr-2 align-top">
                         {isEditing ? (
                           <input
-                            className="w-full rounded border border-sky-300/40 bg-slate-900/70 p-2 text-slate-100"
+                            className="w-full rounded border border-slate-300 bg-white p-2 text-slate-900"
                             value={editItem.name}
                             onChange={(e) => setEditItem((prev) => (prev ? { ...prev, name: e.target.value } : prev))}
                           />
                         ) : (
                           <div>
-                            <p className="font-semibold text-slate-100">{item.name}</p>
-                            <p className="text-xs text-slate-300">{item.description || "No description"}</p>
+                            <p className="font-semibold text-slate-900">{item.name}</p>
+                            <p className="text-xs text-slate-500">{item.description || "No description"}</p>
                           </div>
                         )}
                       </td>
                       <td className="py-3 pr-2 align-top">
                         {isEditing ? (
                           <select
-                            className="rounded border border-sky-300/40 bg-slate-900/70 p-2 text-slate-100"
+                            className="rounded border border-slate-300 bg-white p-2 text-slate-900"
                             value={editItem.category_id}
                             onChange={(e) =>
                               setEditItem((prev) => (prev ? { ...prev, category_id: e.target.value } : prev))
@@ -280,7 +280,7 @@ export default function AdminMenuPage() {
                             ))}
                           </select>
                         ) : (
-                          <span className="text-slate-200">
+                          <span className="text-slate-700">
                             {item.menu_categories?.name || (item.category_id ? categoryMap.get(item.category_id) : null) || "-"}
                           </span>
                         )}
@@ -288,7 +288,7 @@ export default function AdminMenuPage() {
                       <td className="py-3 pr-2 align-top">
                         {isEditing ? (
                           <input
-                            className="w-28 rounded border border-sky-300/40 bg-slate-900/70 p-2 text-slate-100"
+                            className="w-28 rounded border border-slate-300 bg-white p-2 text-slate-900"
                             type="number"
                             min="0"
                             step="0.01"
@@ -303,8 +303,8 @@ export default function AdminMenuPage() {
                         <span
                           className={`rounded-full px-2 py-1 text-xs font-semibold ${
                             item.is_available
-                              ? "bg-emerald-500/20 text-emerald-200"
-                              : "bg-rose-500/20 text-rose-200"
+                              ? "bg-emerald-100 text-emerald-700"
+                              : "bg-rose-100 text-rose-700"
                           }`}
                         >
                           {item.is_available ? "Available" : "Disabled"}
@@ -348,7 +348,7 @@ export default function AdminMenuPage() {
                         </div>
                         {isEditing && (
                           <textarea
-                            className="mt-2 w-full rounded border border-sky-300/40 bg-slate-900/70 p-2 text-slate-100"
+                            className="mt-2 w-full rounded border border-slate-300 bg-white p-2 text-slate-900"
                             value={editItem.description}
                             onChange={(e) =>
                               setEditItem((prev) => (prev ? { ...prev, description: e.target.value } : prev))
@@ -365,7 +365,7 @@ export default function AdminMenuPage() {
           </div>
         )}
 
-        {status && <p className="mt-3 text-sm text-sky-100">{status}</p>}
+        {status && <p className="mt-3 text-sm text-slate-600">{status}</p>}
       </Card>
     </div>
   );

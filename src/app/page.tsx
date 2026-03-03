@@ -28,7 +28,7 @@ export default function HomePage() {
       <Card className="border-sky-100 bg-white shadow-sm">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <h1 className="text-3xl font-black tracking-tight text-sky-600">Magroms POS</h1>
+            <h1 className="text-3xl font-black tracking-tight text-sky-600">Magroms</h1>
             <p className="mt-2 max-w-xl text-sm text-slate-500">
               Production-ready multi-tenant restaurant platform — role-based operations, real-time automation,
               CRM sync, preorder integration, inventory intelligence, and live observability.

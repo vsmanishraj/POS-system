@@ -1,36 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  /* Ultra elegant, soft warm background */
-  --bg: #fdfbf7;
-  /* slate-50/rose-50 mixed */
+  --bg: #f8fafc;
   --surface: #ffffff;
-  /* white */
   --text: #0f172a;
-  /* slate-900 */
   --muted: #64748b;
-  /* slate-500 */
-
-  /* Deep vibrant primary for unmistakably clear actions */
   --primary: #0284c7;
-  /* sky-600 */
   --primary-strong: #0369a1;
-  /* sky-700 */
   --accent: #0ea5e9;
-  /* sky-500 */
-
   --border: #e2e8f0;
-  /* slate-200 */
-
-  /* High contrast Status colours */
   --status-success: #15803d;
-  /* green-700 */
   --status-warning: #b45309;
-  /* amber-700 */
   --status-danger: #b91c1c;
-  /* red-700 */
   --status-info: #0369a1;
-  /* sky-700 */
 }
 
 * {
@@ -41,14 +23,10 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background:
-    radial-gradient(circle at 10% 40%, rgba(2, 132, 199, 0.04) 0%, transparent 35%),
-    radial-gradient(circle at 90% 60%, rgba(14, 165, 233, 0.04) 0%, transparent 35%),
-    var(--bg);
+  background: var(--bg);
   color: var(--text);
-  font-family: "Inter", "Sora", "Segoe UI", sans-serif;
+  font-family: "Inter", "Segoe UI", sans-serif;
   min-height: 100%;
-  /* Bolder base for untrained users reading */
   -webkit-font-smoothing: antialiased;
 }
 
@@ -57,7 +35,6 @@ a {
   text-decoration: none;
 }
 
-/* Live-data pulse indicator */
 @keyframes pulse-soft {
 
   0%,
@@ -80,7 +57,6 @@ a {
   box-shadow: 0 0 8px rgba(21, 128, 61, 0.4);
 }
 
-/* Ultra-clear badge utilities for non-trained users */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -118,11 +94,8 @@ a {
   border: 1px solid #7dd3fc;
 }
 
-/* sky-100/700/300 */
 .badge-muted {
   background: #f1f5f9;
   color: #64748b;
   border: 1px solid #cbd5e1;
 }
-
-/* slate-100/500/300 */
