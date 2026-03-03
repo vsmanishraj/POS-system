@@ -12,7 +12,6 @@ type FormData = z.infer<typeof createRestaurantSchema>;
 
 export default function SuperAdminRestaurantsPage() {
   const [status, setStatus] = useState<string>("");
-  const [seedStatus, setSeedStatus] = useState<string>("");
   const { register, handleSubmit, formState } = useForm<FormData>({
     resolver: zodResolver(createRestaurantSchema),
     defaultValues: {
@@ -32,27 +31,6 @@ export default function SuperAdminRestaurantsPage() {
 
     const json = (await response.json()) as { success: boolean; error?: string; data?: { restaurantId: string } };
     setStatus(json.success ? `Provisioned restaurant ${json.data?.restaurantId}` : json.error ?? "Provisioning failed");
-  };
-
-  const onSeedDemo = async () => {
-    setSeedStatus("Creating demo workspace...");
-    const response = await fetch("/api/automation/seed-demo", { method: "POST" });
-    const json = (await response.json()) as {
-      success: boolean;
-      error?: string;
-      data?: { restaurantId: string; demoPassword: string; users: Array<{ email: string; role: string }> };
-    };
-
-    if (!json.success || !json.data) {
-      setSeedStatus(json.error ?? "Demo seed failed");
-      return;
-    }
-
-    setSeedStatus(
-      `Demo ready (${json.data.restaurantId}). Password: ${json.data.demoPassword}. Users: ${json.data.users
-        .map((u) => `${u.role}:${u.email}`)
-        .join(", ")}`
-    );
   };
 
   return (
@@ -76,15 +54,6 @@ export default function SuperAdminRestaurantsPage() {
           </Button>
         </form>
         {status && <p className="mt-3 text-sm text-gray-700">{status}</p>}
-      </Card>
-
-      <Card>
-        <h2 className="text-lg font-bold">Demo Seed Automation</h2>
-        <p className="mt-2 text-sm text-gray-600">Creates Enterprise tenant, role matrix users, and demo credentials.</p>
-        <Button className="mt-3" onClick={onSeedDemo}>
-          Seed Demo Workspace
-        </Button>
-        {seedStatus && <p className="mt-3 text-sm text-gray-700">{seedStatus}</p>}
       </Card>
     </div>
   );

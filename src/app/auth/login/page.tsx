@@ -31,7 +31,7 @@ function defaultRouteForRole(role: string) {
     case "INVENTORY":
       return "/dashboard/inventory";
     default:
-      return "/demo";
+      return "/dashboard/admin";
   }
 }
 

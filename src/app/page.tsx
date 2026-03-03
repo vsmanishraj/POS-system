@@ -1,52 +1,83 @@
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Route } from "next";
+
+const roles = [
+  { href: "/superadmin", label: "Super Admin", icon: "⚙️", desc: "Platform-wide management, provisioning & monitoring" },
+  { href: "/dashboard/admin", label: "Restaurant Admin", icon: "🏪", desc: "Sales analytics, menu, staff, branding & reports" },
+  { href: "/dashboard/pos", label: "POS Terminal", icon: "🖥️", desc: "Order creation, payment, loyalty & bill management" },
+  { href: "/dashboard/waiter", label: "Waiter Interface", icon: "🍽️", desc: "Table management, order-taking & bill requests" },
+  { href: "/dashboard/kitchen", label: "Kitchen Display", icon: "👨‍🍳", desc: "Live order queue with priority & timer tracking" },
+  { href: "/dashboard/inventory", label: "Inventory", icon: "📦", desc: "Stock levels, restock requests, alerts & wastage" }
+];
+
+const features = [
+  { icon: "🏢", title: "Multi-Tenant", desc: "Full tenant isolation with Supabase RLS" },
+  { icon: "🔒", title: "Role-Based Auth", desc: "JWT claims, middleware guards & MFA" },
+  { icon: "⚡", title: "Realtime", desc: "Live order & inventory updates via Supabase" },
+  { icon: "🤖", title: "AI Features", desc: "Menu OCR, demand predictions & analytics" },
+  { icon: "🔗", title: "Integrations", desc: "CRM, preorder sync, printer & email" },
+  { icon: "📊", title: "Observability", desc: "Structured logs, metrics & Slack alerts" }
+];
 
 export default function HomePage() {
   return (
-    <div className="grid gap-4 md:grid-cols-2">
-      <Card className="border-sky-300/30 bg-slate-950/55">
-        <h1 className="text-3xl font-black tracking-tight text-sky-200">Magroms</h1>
-        <p className="mt-2 text-sm text-slate-300">
-          Production-ready multi-tenant restaurant platform with role-based operations, automation, CRM, preorder sync,
-          inventory intelligence, and live observability.
-        </p>
-        <div className="mt-4 flex gap-2">
-          <Link href="/auth/login">
-            <Button>Sign In</Button>
-          </Link>
-          <Link href="/demo">
-            <Button variant="ghost">Open Demo</Button>
-          </Link>
+    <div className="grid gap-6">
+      {/* Hero */}
+      <Card className="border-sky-100 bg-white shadow-sm">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h1 className="text-3xl font-black tracking-tight text-sky-600">Magroms POS</h1>
+            <p className="mt-2 max-w-xl text-sm text-slate-500">
+              Production-ready multi-tenant restaurant platform — role-based operations, real-time automation,
+              CRM sync, preorder integration, inventory intelligence, and live observability.
+            </p>
+          </div>
+          <div className="flex shrink-0 gap-2">
+            <Link href="/auth/login">
+              <Button>Sign In</Button>
+            </Link>
+            <Link href="/dashboard/admin">
+              <Button variant="ghost">View Dashboard</Button>
+            </Link>
+          </div>
         </div>
       </Card>
-      <Card className="border-sky-300/30 bg-slate-950/55">
-        <h2 className="font-semibold text-sky-200">Quick Access</h2>
-        <p className="mt-1 text-xs text-slate-300">Quick access opens after sign-in and returns to the selected module.</p>
-        <div className="mt-3 grid gap-2 text-sm">
-          <Link href="/superadmin" className="rounded-xl border border-sky-300/30 bg-slate-900/50 px-3 py-2 font-medium text-slate-100 transition hover:border-sky-300/60 hover:bg-sky-500/15">
-            Super Admin Dashboard
-          </Link>
-          <Link href="/dashboard/admin" className="rounded-xl border border-sky-300/30 bg-slate-900/50 px-3 py-2 font-medium text-slate-100 transition hover:border-sky-300/60 hover:bg-sky-500/15">
-            Restaurant Admin Dashboard
-          </Link>
-          <Link href="/dashboard/pos" className="rounded-xl border border-sky-300/30 bg-slate-900/50 px-3 py-2 font-medium text-slate-100 transition hover:border-sky-300/60 hover:bg-sky-500/15">
-            POS Terminal
-          </Link>
-          <Link href="/dashboard/waiter" className="rounded-xl border border-sky-300/30 bg-slate-900/50 px-3 py-2 font-medium text-slate-100 transition hover:border-sky-300/60 hover:bg-sky-500/15">
-            Waiter Interface
-          </Link>
-          <Link href="/dashboard/kitchen" className="rounded-xl border border-sky-300/30 bg-slate-900/50 px-3 py-2 font-medium text-slate-100 transition hover:border-sky-300/60 hover:bg-sky-500/15">
-            Kitchen Display
-          </Link>
-          <Link href="/dashboard/inventory" className="rounded-xl border border-sky-300/30 bg-slate-900/50 px-3 py-2 font-medium text-slate-100 transition hover:border-sky-300/60 hover:bg-sky-500/15">
-            Inventory Dashboard
-          </Link>
-          <Link href="/demo" className="rounded-xl border border-sky-300/30 bg-slate-900/50 px-3 py-2 font-medium text-slate-100 transition hover:border-sky-300/60 hover:bg-sky-500/15">
-            Demo Mode
-          </Link>
+
+      {/* Role Access Grid */}
+      <div>
+        <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-sky-600/80">Module Access</h2>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {roles.map((role) => (
+            <Link key={role.href} href={role.href as Route}>
+              <div className="group flex h-full flex-col rounded-xl border border-slate-200 bg-white p-4 transition hover:border-sky-300 hover:bg-sky-50 shadow-sm">
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">{role.icon}</span>
+                  <span className="font-semibold text-slate-900 group-hover:text-sky-700">{role.label}</span>
+                </div>
+                <p className="mt-2 text-xs text-slate-500">{role.desc}</p>
+              </div>
+            </Link>
+          ))}
         </div>
-      </Card>
+      </div>
+
+      {/* Feature Highlights */}
+      <div>
+        <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-sky-600/80">Platform Features</h2>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {features.map((f) => (
+            <div key={f.title} className="flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <span className="text-2xl">{f.icon}</span>
+              <div>
+                <p className="font-semibold text-slate-900">{f.title}</p>
+                <p className="mt-0.5 text-xs text-slate-500">{f.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
